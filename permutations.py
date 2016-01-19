@@ -30,15 +30,43 @@ def sample_net(arr):
                 new_arr[x,y] = 1
     return new_arr
 
-if __name__ == "__main__":
-    net = kron_net(11)
-    l_perm_mat = rand_permutation(2 ** 11)
-    r_perm_mat = rand_permutation(2 ** 11)
+def row_col_shuffle_experiment():
+    print "This is to show that row and column shuffling will get you something like a plaid network"
+    print "If that previous statement is actually true, the task of finding a gradient with the fractal hypothesis is finding and applying a permutation of those two shuffles"
+    print "But getting those two lists to obey a permutation, by the decision tree analysis, is O(n log n)"
+    print "How much time is finding the permutation in the first place? I do not know, but it can't be that much, can it?"
+    net = kron_net(10)
+    l_perm_mat = rand_permutation(2 ** 10)
+    r_perm_mat = rand_permutation(2 ** 10)
     net = np.dot(l_perm_mat, net)
     net = np.dot(net, r_perm_mat)
-    net = sample_net(net)
-    # net = total_shuffle(net)
+    plt.close()
     plt.plot(sorted(net.sum(axis=0)))
-    #plt.imshow(net)
-    #plt.colorbar()
+    plt.title(some shit) #########
+    plt.xlabel(some shit) #########
+    plt.ylabel(some shit) #########
     plt.show()
+    plt.close()
+    plt.imshow(net)
+    plt.title(some shit) #########
+    plt.show()
+
+def total_shuffle_experiment():
+    print "This is to show that _total_ shuffling, eg., construing the matrix as a vector and shuffling the members of the vector, loses you the nice properties of the fractal matrix"
+    net = kron_net(10)
+    net = total_shuffle(net)
+    plt.close()
+    plt.plot(sorted(net.sum(axis=0)))
+    plt.title(some shit) #########
+    plt.xlabel(some shit) #########
+    plt.ylabel(some shit) #########
+    plt.show()
+    plt.close()
+    plt.imshow(net)
+    plt.title(some shit) #########
+    plt.show()
+    plt.close()
+
+if __name__ == "__main__":
+    row_col_shuffle_experiment()
+    total_shuffle_experiment()
