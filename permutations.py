@@ -3,15 +3,21 @@ import numpy.random as npr
 import matplotlib.pyplot as plt
 
 def rand_permutation(size):
-    arr = np.eye(size)
-    # apply knuth shuffle?
+    arr = np.identity(size)
+    npr.shuffle(arr) # inplace
     return arr
 
 def total_shuffle(arr):
-    pass
+    new_arr = arr.copy()
+    npr.shuffle(new_arr.flat)
+    return new_arr
 
 def kron_net(order):
-    pass
+    generator = np.array([[0.99, 0.7], [0.7, 0.15]])
+    arr = generator.copy()
+    for x in xrange(order):
+        arr = np.kron(arr, generator)
+    return arr
 
 def sample_net(arr):
     """
