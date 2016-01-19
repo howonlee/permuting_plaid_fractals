@@ -15,7 +15,7 @@ def total_shuffle(arr):
 def kron_net(order):
     generator = np.array([[0.99, 0.7], [0.7, 0.15]])
     arr = generator.copy()
-    for x in xrange(order):
+    for x in xrange(order-1):
         arr = np.kron(arr, generator)
     return arr
 
@@ -31,4 +31,14 @@ def sample_net(arr):
     return new_arr
 
 if __name__ == "__main__":
-    pass
+    net = kron_net(11)
+    l_perm_mat = rand_permutation(2 ** 11)
+    r_perm_mat = rand_permutation(2 ** 11)
+    net = np.dot(l_perm_mat, net)
+    net = np.dot(net, r_perm_mat)
+    net = sample_net(net)
+    # net = total_shuffle(net)
+    plt.plot(sorted(net.sum(axis=0)))
+    #plt.imshow(net)
+    #plt.colorbar()
+    plt.show()
