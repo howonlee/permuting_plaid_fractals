@@ -42,14 +42,16 @@ def row_col_shuffle_experiment():
     net = np.dot(net, r_perm_mat)
     plt.close()
     plt.plot(sorted(net.sum(axis=0)))
-    plt.title(some shit) #########
-    plt.xlabel(some shit) #########
-    plt.ylabel(some shit) #########
+    plt.title("inequality of sorted ensemble weight")
+    plt.xlabel("ensemble weight rank")
+    plt.ylabel("ensemble weight")
     plt.show()
     plt.close()
     plt.imshow(net)
-    plt.title(some shit) #########
+    plt.title("view of unsampled plaid matrix ensemble")
     plt.show()
+    plt.close()
+    print "if you want to sample the ensemble and look at it that way, there's a function in the code"
 
 def total_shuffle_experiment():
     print "This is to show that _total_ shuffling, eg., construing the matrix as a vector and shuffling the members of the vector, loses you the nice properties of the fractal matrix"
@@ -57,13 +59,13 @@ def total_shuffle_experiment():
     net = total_shuffle(net)
     plt.close()
     plt.plot(sorted(net.sum(axis=0)))
-    plt.title(some shit) #########
-    plt.xlabel(some shit) #########
-    plt.ylabel(some shit) #########
+    plt.title("inequality of sorted ensemble weight")
+    plt.xlabel("ensemble weight rank")
+    plt.ylabel("ensemble weight")
     plt.show()
     plt.close()
     plt.imshow(net)
-    plt.title(some shit) #########
+    plt.title("view of unsampled shuffled 'ensemble'")
     plt.show()
     plt.close()
 
