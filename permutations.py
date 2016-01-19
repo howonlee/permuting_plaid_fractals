@@ -13,7 +13,8 @@ def total_shuffle(arr):
     return new_arr
 
 def kron_net(order):
-    generator = np.array([[0.99, 0.7], [0.7, 0.15]])
+    # taken from the SKG paper
+    generator = np.array([[0.9, 0.7], [0.7, 0.15]])
     arr = generator.copy()
     for x in xrange(order-1):
         arr = np.kron(arr, generator)
