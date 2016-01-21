@@ -4,16 +4,17 @@ import matplotlib.pyplot as plt
 
 def rand_permutation(size):
     arr = np.identity(size)
-    npr.shuffle(arr) # inplace
+    npr.shuffle(arr) # inplace, one axis only
     return arr
 
 def total_shuffle(arr):
     new_arr = arr.copy()
+    # inplace on the copy, on the one flattened axis
     npr.shuffle(new_arr.flat)
     return new_arr
 
 def kron_net(order):
-    # taken from the SKG paper
+    # generator taken from the SKG paper
     generator = np.array([[0.9, 0.7], [0.7, 0.15]])
     arr = generator.copy()
     for x in xrange(order-1):
@@ -48,8 +49,13 @@ def row_col_shuffle_experiment():
     plt.ylabel("ensemble weight")
     plt.show()
     plt.close()
-    plt.imshow(net)
-    plt.title("view of unsampled plaid matrix ensemble")
+    plt.imshow(net, cmap="Greys")
+    plt.title("Plaid distribution, row + col shuffle")
+    plt.show()
+    plt.close()
+    net = sample_net(net)
+    plt.imshow(net, cmap="Greys")
+    plt.title("Plaid sample, row + col shuffle")
     plt.show()
     plt.close()
     print "if you want to sample the ensemble and look at it that way, there's a function in the code"
@@ -65,11 +71,30 @@ def total_shuffle_experiment():
     plt.ylabel("ensemble weight")
     plt.show()
     plt.close()
-    plt.imshow(net)
-    plt.title("view of unsampled shuffled 'ensemble'")
+    plt.imshow(net, cmap="Greys")
+    plt.title("Plaid distribution, total shuffle")
+    plt.show()
+    plt.close()
+    net = sample_net(net)
+    plt.imshow(net, cmap="Greys")
+    plt.title("Plaid sample, total shuffle")
+    plt.show()
+    plt.close()
+
+def show_skg():
+    net = kron_net(10)
+    plt.close()
+    plt.imshow(net, cmap="Greys")
+    plt.title("Stochastic Kronecker net distribution")
+    plt.show()
+    plt.close()
+    net = sample_net(net)
+    plt.imshow(net, cmap="Greys")
+    plt.title("Stochastic Kronecker net sample")
     plt.show()
     plt.close()
 
 if __name__ == "__main__":
+    show_skg()
     row_col_shuffle_experiment()
     total_shuffle_experiment()
